@@ -1,4 +1,4 @@
-defmodule HelloWifi do
+defmodule Blinkfi do
   use Application
 
   @interface :wlan0
@@ -11,12 +11,14 @@ defmodule HelloWifi do
     # Define workers and child supervisors to be supervised
     children = [
       worker(Task, [fn -> init_kernel_modules() end], restart: :transient, id: Nerves.Init.KernelModules),
-      worker(Task, [fn -> init_network() end], restart: :transient, id: Nerves.Init.Network)
+      worker(Task, [fn -> init_network() end], restart: :transient, id: Nerves.Init.Network),
+      worker(Task, [Blinkfi.Server, :start, [4040]]),
+      worker(Blinkfi.Output, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: HelloWifi.Supervisor]
+    opts = [strategy: :one_for_one, name: Blinkfi.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
@@ -25,7 +27,7 @@ defmodule HelloWifi do
   end
 
   def init_network() do
-    opts = Application.get_env(:hello_wifi, @interface)
+    opts = Application.get_env(:blinkfi, @interface)
     Nerves.InterimWiFi.setup(@interface, opts)
   end
 

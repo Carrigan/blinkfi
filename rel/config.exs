@@ -26,8 +26,8 @@ end
 # when running `mix release`, the first release in the file
 # will be used by default
 
-release :hello_wifi do
-  set version: current_version(:hello_wifi)
+release :blinkfi do
+  set version: current_version(:blinkfi)
   if System.get_env("NERVES_SYSTEM") do
     set dev_mode: false
     set include_src: false

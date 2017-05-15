@@ -1,4 +1,4 @@
-defmodule HelloWifi.Mixfile do
+defmodule Blinkfi.Mixfile do
   use Mix.Project
 
   @target System.get_env("MIX_TARGET") || "host"
@@ -10,7 +10,7 @@ defmodule HelloWifi.Mixfile do
   """, :reset])
 
   def project do
-    [app: :hello_wifi,
+    [app: :blinkfi,
      version: "0.1.0",
      elixir: "~> 1.4.0",
      target: @target,
@@ -32,12 +32,12 @@ defmodule HelloWifi.Mixfile do
   # Specify target specific application configurations
   # It is common that the application start function will start and supervise
   # applications which could cause the host to fail. Because of this, we only
-  # invoke HelloWifi.start/2 when running on a target.
+  # invoke Blinkfi.start/2 when running on a target.
   def application("host") do
     [extra_applications: [:logger]]
   end
   def application(_target) do
-    [mod: {HelloWifi, []},
+    [mod: {Blinkfi, []},
      extra_applications: [:logger]]
   end
 
@@ -59,8 +59,9 @@ defmodule HelloWifi.Mixfile do
   def deps("host"), do: []
   def deps(_) do
     [{:nerves_runtime, "~> 0.1.0"},
-     {:"nerves_system_rpi0", "~> 0.12.0", runtime: false},
-     {:nerves_interim_wifi, "~> 0.2.0"}]
+     {:nerves_system_rpi0, "~> 0.12.0", runtime: false},
+     {:nerves_interim_wifi, "~> 0.2.0"},
+     {:nerves_leds, "~> 0.7.0"}]
   end
 
   # We do not invoke the Nerves Env when running on the Host

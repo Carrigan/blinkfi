@@ -12,7 +12,10 @@ use Mix.Config
 # import_config "#{Mix.Project.config[:target]}.exs"
 
 # Change these options to your
-config :hello_wifi, :wlan0,
+config :blinkfi, :wlan0,
   ssid: "Smashing Boxes",
   key_mgmt: :"WPA-PSK",
-  psk: "Sm@shing!"
+  psk: Enter Your Password Here
+
+config :blinkfi, led_list: [ :green ]
+config :nerves_leds, names: [ green: "led0" ]

@@ -16,7 +16,7 @@ If you're using another board, you will need to connect a supported USB WiFi don
    # config/config.exs
    use Mix.Config
 
-   config :hello_wifi, :wlan0,
+   config :blinkfi, :wlan0,
      ssid: "my_accesspoint_name",
      key_mgmt: :"WPA-PSK",
      psk: "secret"
